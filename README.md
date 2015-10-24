@@ -1,2 +1,2 @@
 # RandomCode
-Codes which will have some of my good codes
+Elegant codes which i prefer to stay on this repository
