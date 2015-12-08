@@ -2,14 +2,14 @@
 
     RSA Key Generation program
     
-    Key size is 1024-bits
+    Key size is 1024-bits (default)
     The RabinMiller generates relatively very large prime numbers of order 2^keySize
     and the Cryptomath checks for the GCD of keys.
     
 '''
 
 #import the necessary files
-import random, RabinMiller, Cryptomath
+import random, GeneratePrime, Cryptomath
 
 def main():
     print ("RSA Key Genarating...")
@@ -17,9 +17,9 @@ def main():
 
 def generateKey(keySize):
     print ("Generating p...")
-    p = RabinMiller.generateLargePrime(keySize)         #Generate Very large prime numbers from Rabin Miller Algorithm
+    p = GeneratePrime.generateLargePrime(keySize)         #Generate Very large prime numbers from Rabin Miller Algorithm
     print ("Generating q...")
-    q = RabinMiller.generateLargePrime(keySize)         #Generate very large prime numbers from Rabin Miller Algorithm
+    q = GeneratePrime.generateLargePrime(keySize)         #Generate very large prime numbers from Rabin Miller Algorithm
 
     n = p * q               #Calculate n
     fi = (p - 1) * (q - 1)  #Calculate fi(n)
