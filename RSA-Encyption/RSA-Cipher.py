@@ -1,4 +1,4 @@
-import random, sys
+import random, sys, ReadFromFile, os
 
 DEFAULT = 128
 BYTE_SIZE = 256
@@ -9,7 +9,9 @@ def main():
 
     if mode[0] in 'E e'.split():
         filename = 'encryted_file.txt'
-        public_key_file = 'key_file_pubkey.txt'
+        public_key_file = input("Enter the public key file name with extension: ")
+        if not (os.path.exists(public_key_file)):
+            sys.exit("The file %s doesn't exist. First run keyGenerate.py..."%(public_key_file))
 
         message = input("Enter the message that you want to encrypt: ")
         print ("Encrypting and writing to the file %s..."%(filename))
@@ -31,17 +33,6 @@ def GetBlocksFromText(message, blockSize = DEFAULT):
         blockInteger.append(blockInt)
 
     return blockInteger
-    
-def ReadFromFile(keyFile):
-    try:
-        with open (keyFile, 'r') as data:
-            content = data.read()
-    except IOError as err:
-        print ("File Error: " + str(err))
-
-    keySize, n, hashVal = content.split(',')
-
-    return (int(keySize), int(n), int(hashVal))
 
 def EncryptMessage(message, key, blockSize = DEFAULT):
     encrBlock = []
@@ -53,7 +44,7 @@ def EncryptMessage(message, key, blockSize = DEFAULT):
     return encrBlock
 
 def Encrypt(message, filename, keyFile, blockSize = DEFAULT):
-    keySize, n, e = ReadFromFile(keyFile)
+    keySize, n, e = ReadFromFile.ReadFromFile(keyFile)
 
     if keySize < blockSize * 8:
         sys.exit("ERROR: Block size is %s-bits and key size is %s-bits. RSA cipher requires the block size to be equal to or less than the key size."%(blockSize * 8, keySize))
@@ -64,7 +55,7 @@ def Encrypt(message, filename, keyFile, blockSize = DEFAULT):
         encrypted_block[i] = str(encrypted_block[i])
 
     encrypted_content = ','.join(encrypted_block)
-    encrypted_content = '%s_%s_%s'%(len(message), blockSize, encrypted_content)
+    encrypted_content = '%s, %s, %s'%(len(message), blockSize, encrypted_content)
     
     try:
         with open(filename, 'w') as data:
