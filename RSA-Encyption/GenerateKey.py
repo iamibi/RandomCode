@@ -13,7 +13,9 @@ import random, GeneratePrime, Cryptomath, sys, os
 
 def main():
     print ("RSA Key Genarating...")
-    makeKey('key_file', 1024)       #Key size is 1024-bits and name starts with key_file
+    key_file_name = input("Enter the starting name of the key file (Eg: key_file): ")
+    makeKey(key_file_name, 1024)       #Key size is 1024-bits and name starts with key_file
+    print ("Keyfile made...")
 
 def generateKey(keySize):
     print ("Generating p...")
