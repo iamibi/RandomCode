@@ -1,3 +1,7 @@
+'''
+    Vigenere Cipher, a better encryption technique from Caeser Cipher
+'''
+
 #Created a main function under the __main__ namespace. So whenever the global namespace is called, the main
 #function gets invoked
 def main():
