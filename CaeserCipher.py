@@ -5,9 +5,9 @@ def getDecision():
     '''
     while (True):
         print ("Encrypt or Decrypt a message ?: ", end=''),
-        descision = input()
-        if (descision in 'encrypt e decrypt d E D Encrypt Decrypt'.split()):
-            return descision
+        decision = input()
+        if (decision in 'encrypt e decrypt d E D Encrypt Decrypt'.split()):
+            return decision
         else:
             print ("You entered wrong text. Please either enter 'encrypt' or 'e' or 'decrypt' or 'd'")
 
@@ -28,12 +28,12 @@ def getKey():
     key = key % 26
     return key
 
-def getConvMssg(descision, message, key):
+def getConvMssg(decision, message, key):
     '''
     # This function takes in the operation the user want to perform
     # a message and as well as a key for conversion
     '''
-    if (descision[0] == 'd' or descision[0] == 'D'):
+    if (decision[0] == 'd' or decision[0] == 'D'):
         key = -key
     Output = ''
     
@@ -70,8 +70,8 @@ def getConvMssg(descision, message, key):
     return Output
 
 #Initialise the data
-descision = getDecision()   #What operation is to be performed
+decision = getDecision()    #What operation is to be performed
 message = getMessage()      #Get the message that you want to convert
 key = getKey()              #Get the key for the rotation
 
-print ("Your Converted message is: ", getConvMssg(descision, message, key))
+print ("Your Converted message is: ", getConvMssg(decision, message, key))
